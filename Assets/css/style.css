@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    width: 100vw;
+    height: 4rem;
+    background-image: linear-gradient(
+        rgb(19, 42, 248) 0%,
+        rgb(4, 2, 105) 100%
+    );
+    text-align: center;
+    color: white;
+}
+
+.container {
+    margin: 0;
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    margin: 1rem;
+}
+
+.card-header {
+    background-image: linear-gradient(
+        rgb(19, 42, 248) 0%,
+        rgb(4, 2, 105) 100%
+    );
+    color: white;
+}
+
+.small-card {
+    width: 16rem;
+    margin: 1rem;
+}
