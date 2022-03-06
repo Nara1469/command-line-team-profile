@@ -25,6 +25,7 @@ header {
 
 .card {
     margin: 1rem;
+    width: 18rem;
 }
 
 .card-header {
