@@ -1,8 +1,21 @@
 # team-profile-generator
+
 Bootcamp Week 10: Homework
+
 # 10 Object-Oriented Programming: Team Profile Generator
 
-## Your Task
+## Table of Contents 
+
+- [Description](#description)
+- [User Story](#story)
+- [License](#license)
+- [Installation Guide](#installation)
+- [My Solution](#my-solution)
+- [Test](#test)
+- [Samples](#samples)
+- [Questions](#questions)
+
+## Description
 
 Your task is to build a Node.js command-line application that takes in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person. Testing is key to making code maintainable, so you’ll also write a unit test for every part of your code and ensure that it passes each test.
 
@@ -18,9 +31,45 @@ I WANT to generate a webpage that displays my team's basic info
 SO THAT I have quick access to their emails and GitHub profiles
 ```
 
-## Acceptance Criteria
+## License
 
-```md
+🏆 This application is licensed under The MIT License.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Installation Guide
+
+This application uses [Jest](https://www.npmjs.com/package/jest) for running the unit tests and [Inquirer](https://www.npmjs.com/package/inquirer) for collecting input from the user. So you need to install all these necessary dependencies. First clone the repository then run the following command at the root directory to install the dependencies:
+
+```
+npm i
+```
+    
+The application will be invoked by using the following command:
+    
+```
+node index
+```
+
+A directory structure looks like in the following way:
+
+```
+.
+├── __tests__/             //jest tests
+│   ├── Employee.test.js
+│   ├── Engineer.test.js
+│   ├── Intern.test.js
+│   └── Manager.test.js
+├── dist/                  // rendered output (HTML) and CSS style sheet      
+├── lib/                   // classes
+├── src/                   // template helper code 
+├── .gitignore             // indicates which folders and files Git should ignore
+├── index.js               // runs the application
+└── package.json           
+```
+
+## My Solution
+
 GIVEN a command-line application that accepts user input
 WHEN I am prompted for my team members and their information
 THEN an HTML file is generated that displays a nicely formatted team roster based on user input
@@ -38,46 +87,12 @@ WHEN I select the intern option
 THEN I am prompted to enter the intern’s name, ID, email, and school, and I am taken back to the menu
 WHEN I decide to finish building my team
 THEN I exit the application, and the HTML is generated
-```
 
-## Mock-Up
+The application must have `Employee`, `Manager`, `Engineer`, and `Intern` classes
 
-The following image shows a mock-up of the generated HTML’s appearance and functionality:
+## Test
 
-![HTML webpage titled “My Team” features five boxes listing employee names, titles, and other key info.](./Assets/10-object-oriented-programming-homework-demo.png)
-
-The styling in the image is just an example, so feel free to add your own.
-
-## Getting Started
-
-This homework will combine many of the skills we've covered so far. In addition to the User Story and Acceptance Criteria, we’ve provided some guidelines to help get started.
-
-Your application should use [Jest](https://www.npmjs.com/package/jest) for running the unit tests and [Inquirer](https://www.npmjs.com/package/inquirer) for collecting input from the user. The application will be invoked by using the following command:
-
-```bash
-node index.js
-```
-
-It is recommended that you start with a directory structure that looks like the following example:
-
-```md
-.
-├── __tests__/             //jest tests
-│   ├── Employee.test.js
-│   ├── Engineer.test.js
-│   ├── Intern.test.js
-│   └── Manager.test.js
-├── dist/                  // rendered output (HTML) and CSS style sheet      
-├── lib/                   // classes
-├── src/                   // template helper code 
-├── .gitignore             // indicates which folders and files Git should ignore
-├── index.js               // runs the application
-└── package.json           
-```
-
-**Important**: Make sure that you remove `dist` from the `.gitignore` file so that Git will track this folder and include it when you push up to your application's repository.
-
-The application must include `Employee`, `Manager`, `Engineer`, and `Intern` classes. The tests for these classes (in the `_tests_` directory) must ALL pass.
+The tests for these classes (in the ./tests directory) must ALL pass.
 
 The first class is an `Employee` parent class with the following properties and methods:
 
@@ -121,59 +136,26 @@ In addition to `Employee`'s properties and methods, `Intern` will also have the 
 
 Finally, although it’s not a requirement, consider adding validation to ensure that user input is in the proper format.
 
-## Grading Requirements
+## Samples
 
-This homework is graded based on the following criteria:
+The index.html file is created in ./dist directory. Here is a link of the generated [index.html](./dist/index.html) as a result of this application.
 
-### Deliverables: 15%
+Because this application won’t be deployed, here is a link to a walkthrough video that demonstrates the Team Profile Generator functionality. 
 
-* A sample HTML file generated using the application must be submitted.
+- [Walkthrough Video - Screen Castify Format](./images/team-profile-functionality-webm.webm) 
+- [Walkthrough Video - Mp4 Format](./images/team-profile-functionality-mp4.mp4)
 
-* Your GitHub repository containing your application code.
+Also, passing tests must be submitted, and a link to the video. The walkthrough video must show all four tests passing from the command line.
 
-### Walkthrough Video: 32%
+- [Walkthrough Video - Screen Castify Format](./images/team-profile-functionality-webm.webm) 
+- [Walkthrough Video - Mp4 Format](./images/team-profile-functionality-mp4.mp4)
 
-* A walkthrough video that demonstrates the functionality of the Team Profile Generator and passing tests must be submitted, and a link to the video should be included in your README file.
+### Screenshots 
 
-* The walkthrough video must show all four tests passing from the command line.
+The following image shows the inputs from the command line in Terminal: ![User Input](./images/command-line-input.png)
 
-* The walkthrough video must demonstrate how a user would invoke the application from the command line.
+The following image shows the generated HTML’s appearance: ![HTML webpage titled “Developer Team” features five boxes listing employee names, titles, and other key info.](./images/team-profile-generator.png)
 
-* The walkthrough video must demonstrate how a user would enter responses to all of the prompts in the application.
+## Questions
 
-* The walkthrough video must demonstrate a generated HTML file that matches the user input.
-
-### Technical Acceptance Criteria: 40%
-
-* Satisfies all of the preceding acceptance criteria plus the following:
-
-  * Uses the [Inquirer package](https://www.npmjs.com/package/inquirer).
-
-  * Uses the [Jest package](https://www.npmjs.com/package/jest) for a suite of unit tests.
-
-  * The application must have `Employee`, `Manager`, `Engineer`, and `Intern` classes.
-
-### Repository Quality: 13%
-
-* Repository has a unique name.
-
-* Repository follows best practices for file structure and naming conventions.
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages.
-
-* Repository contains a high-quality readme with description and a link to a walkthrough video.
-
-## Review
-
-You are required to submit the following for review:
-
-* A walkthrough video that demonstrates the functionality of the application and passing tests.
-
-* A sample HTML file generated using your application.
-
-* The URL of the GitHub repository, with a unique name and a readme describing the project.
-
----
-© 2022 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+If you have any questions about the repo, open an issue or contact me directly at naraamtm@gmail.com. You can find more of my work at [GitHub](https://github.com/nara1469/).
