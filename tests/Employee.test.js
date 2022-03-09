@@ -1,77 +1,63 @@
-const Employee = require('../Employee');
+const Employee = require('../lib/Employee');
 
 describe('Employee class', () => {
-  it('Creates an array of objects', () => {
-    const employee = new Employee('Manager');
+  describe('Initialization', () => {
+    it('Creates an Employee object when called with the "new" keyword', () => {
+      const employee = new Employee('Dan', '001', 'test@gmail.com');
 
-    expect(employee.firstName).toBeInstanceOf(firstName);
+      expect(typeof (employee)).toEqual('object');
+    });
 
-  });
+    it('Creates "firstName" property', () => {
+      const employee = new Employee('Dan', '001', 'test@gmail.com');
 
-  describe('getName', () => {
-    it('Input name entered', () => {
-      expect.toBeInstanceOf(firstName).toBe(true);
+      expect(employee.firstName).toEqual('Dan');
+    });
+
+    it('Creates "id" property', () => {
+      const employee = new Employee('Dan', '001', 'test@gmail.com');
+
+      expect(employee.id).toEqual('001');
+    });
+
+    it('Creates "email" property', () => {
+      const employee = new Employee('Dan', '001', 'test@gmail.com');
+
+      expect(employee.email).toEqual('test@gmail.com');
+    });
+
+    describe('getName', () => {
+      it('should return a "firstName" property that has an updated value', () => {
+        const employee = new Employee('Dan', '001', 'test@gmail.com');
+
+        expect(employee.getName()).toEqual('Dan');
+      });
+    });
+
+    describe('getId', () => {
+      it('should return a "id" property that has an updated value', () => {
+        const employee = new Employee('Dan', '001', 'test@gmail.com');
+
+        expect(employee.getId()).toEqual('001');
+      });
+    });
+
+    describe('getName', () => {
+      it('should return a "email" property that has an updated value', () => {
+        const employee = new Employee('Dan', '001', 'test@gmail.com');
+
+        expect(employee.getEmail()).toEqual('test@gmail.com');
+      });
+    });
+
+    describe('getRole', () => {
+      it('should return "Employee" value', () => {
+        const employee = new Employee('Dan', '001', 'test@gmail.com');
+        const role = 'Employee';
+
+        expect(employee.getRole()).toEqual(role);
+      });
     });
 
   });
-});
-
-const Employee = require("../lib/Employee");
-
-describe("Employee", () => {
-    it("Can instantiate Employee instance", () => {
-        const e = new Employee();
-        expect(typeof(e)).toBe("object");
-    });
-
-    it("Can set name via constructor arguments", () => {
-        const name = "Alice";
-        const e = new Employee(name);
-        expect(e.name).toBe(name);
-    });
-
-    it("Can set id via constructor argument", () => {
-        const testValue = 100;
-        const e = new Employee("Foo", testValue);
-        expect(e.id).toBe(testValue);
-    });
-
-    it("Can set email via constructor argument", () => {
-        const testValue = "test@test.com";
-        const e = new Employee("Foo", 1, testValue);
-        expect(e.email).toBe(testValue);
-    });
-
-    describe("getName", () => {
-        it("Can get name via getName()", () => {
-            const testValue = "Alice";
-            const e = new Employee(testValue);
-            expect(e.getName()).toBe(testValue);
-        });
-    });
-        
-    describe("getId", () => {
-        it("Can get id via getId()", () => {
-            const testValue = 100;
-            const e = new Employee("Foo", testValue);
-            expect(e.getId()).toBe(testValue);
-        });
-    });
-        
-    describe("getEmail", () => {
-        it("Can get email via getEmail()", () => {
-            const testValue = "test@test.com";
-            const e = new Employee("Foo", 1, testValue);
-            expect(e.getEmail()).toBe(testValue);
-        });
-    });
-        
-    describe("getRole", () => {
-        it("getRole() should return \"Employee\"", () => {
-            const testValue = "Employee";
-            const e = new Employee("Alice", 1, "test@test.com");
-            expect(e.getRole()).toBe(testValue);
-        });
-    });
-    
 });

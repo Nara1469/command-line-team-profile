@@ -1,37 +1,13 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+
+// ------------- Classes ---------------------
+
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
-const employees = [];
-
-// Ask questions(name, role, id, email) from command line
-const promptMember = () => {
-  return inquirer.prompt([
-    {
-      type: 'input',
-      name: 'name',
-      message: 'Team member name:',
-    },
-    {
-      type: 'rawlist',
-      name: 'role',
-      message: 'Select the member\'s role:',
-      choices: ['Manager', 'Engineer', 'Intern'],
-    },
-    {
-      type: 'input',
-      name: 'id',
-      message: 'Employee ID:',
-    },
-    {
-      type: 'input',
-      name: 'email',
-      message: 'Email address:',
-    },
-  ]);
-}
+// ---------------- Variables -----------------
 
 const beginHTML = `<!DOCTYPE html>
 <html lang="en">
@@ -55,8 +31,68 @@ const endHTML = `\n  </div>
 </body>
 </html>`;
 
-// Append an employee card in HTML
-function appendEmployeeCard(member) {
+//  ------------------ Functions ----------------------
+
+// Gets inputs from command line for Manager information
+const promptManager = () => {
+  console.log('Team Profile Generator\n');
+  return inquirer.prompt([
+    {
+      type: 'input',
+      name: 'name',
+      message: 'Please, enter Manager\'s name:',
+    },
+    {
+      type: 'input',
+      name: 'id',
+      message: 'Employee ID:',
+    },
+    {
+      type: 'input',
+      name: 'email',
+      message: 'Email address:',
+    },
+    {
+      type: 'input',
+      name: 'office',
+      message: 'Office #:',
+    },
+    {
+      type: 'confirm',
+      name: 'moreMembers',
+      message: 'Would you like to add more team members?',
+    }
+  ]);
+}
+// Gets inputs from command line for Engineer or Intern information
+const promptMember = () => {
+  return inquirer.prompt([
+    {
+      type: 'input',
+      name: 'name',
+      message: 'Team member name:',
+    },
+    {
+      type: 'rawlist',
+      name: 'role',
+      message: 'Select the member\'s role:',
+      choices: ['Engineer', 'Intern'],
+    },
+    {
+      type: 'input',
+      name: 'id',
+      message: 'Employee ID:',
+    },
+    {
+      type: 'input',
+      name: 'email',
+      message: 'Email address:',
+    },
+  ]);
+}
+
+// Append a team member card in HTML
+function appendMemberCard(member) {
   const name = member.getName();
   const role = member.getRole();
   const id = member.getId();
@@ -73,7 +109,7 @@ function appendEmployeeCard(member) {
             <div class="card small-card">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${id}</li>
-                <li class="list-group-item"><a href="mailto:${email}">Email: ${email}</a></li>
+                <li class="list-group-item">Email: <a href="mailto:${email}">${email}</a></li>
                 <li class="list-group-item">Office #: ${office}</li>
               </ul>
             </div>
@@ -90,8 +126,8 @@ function appendEmployeeCard(member) {
             <div class="card small-card">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${id}</li>
-                <li class="list-group-item"><a href="mailto:${email}">Email: ${email}</a></li>
-                <li class="list-group-item"><a href="https://github.com/${github}">GitHub: ${github}</a></li>
+                <li class="list-group-item">Email: <a href="mailto:${email}">${email}</a></li>
+                <li class="list-group-item">GitHub: <a target="_blank" href="https://github.com/${github}">${github}</a></li>
               </ul>
             </div>
           </div>`;
@@ -107,7 +143,7 @@ function appendEmployeeCard(member) {
             <div class="card small-card">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${id}</li>
-                <li class="list-group-item"><a href="mailto:${email}">Email: ${email}</a></li>
+                <li class="list-group-item">Email: <a href="mailto:${email}">${email}</a></li>
                 <li class="list-group-item">School: ${school}</li>
               </ul>
             </div>
@@ -127,19 +163,10 @@ function addMember() {
   promptMember()
     .then(function ({ name, role, id, email }) {
       let roleQuestion = '';
-      switch (role) {
-        case 'Manager':
-          roleQuestion = 'office #:';
-          break;
-        case 'Engineer':
+      if (role === 'Engineer') {
           roleQuestion = 'GitHub username:';
-          break;
-        case 'Intern':
+      } else {
           roleQuestion = 'school name:';
-          break;      
-        default:
-          roleQuestion = '';
-          break;
       }
       // console.log(role);
       inquirer.prompt([
@@ -155,26 +182,14 @@ function addMember() {
         }])
         .then(function ({ roleDependent, moreMembers }) {
           let newMember;
-          switch (role) {
-            case 'Manager':
-              newMember = new Manager(name, id, email, roleDependent);
-              break;
-            case 'Engineer':
+          if (role === 'Engineer') {
               newMember = new Engineer(name, id, email, roleDependent);
-              break;
-            case 'Intern':
+          } else {
               newMember = new Intern(name, id, email, roleDependent);
-              break;
-            default:
-              break;
           }
-          employees.push(newMember);
-          if (employees.length === 1) {
-            fs.writeFileSync('./dist/index.html', beginHTML);
-          }
-          appendEmployeeCard(newMember);
+          appendMemberCard(newMember);
           if (moreMembers) {
-            addMember();
+            addMember();  // if moreMember added call this.function itself
           } else {
             fs.appendFileSync('./dist/index.html', endHTML);
           }
@@ -186,7 +201,7 @@ function addMember() {
 function addMember() {
   inquirer.prompt([
     name,   
-    role, // choices['Manager', 'Engineer', 'Intern']
+    role, // ['Engineer', 'Intern']
     id,
     email,
   ])
@@ -216,9 +231,19 @@ function addMember() {
 */
 
 
-// a function to initialize app
+// a function to initialize app 
 function init() {
-  addMember();
+  promptManager()  // Starts with getting Manager's info
+    .then(function ({ name, id, email, office, moreMembers}) {
+      let newMember = new Manager(name, id, email, office);
+      fs.writeFileSync('./dist/index.html', beginHTML);
+      appendMemberCard(newMember);
+      if (moreMembers) {
+        addMember();
+      } else {
+        fs.appendFileSync('./dist/index.html', endHTML);
+      }
+    });
 }
 
 // Function call to initialize app

@@ -6,26 +6,28 @@ Bootcamp Week 10: Homework
 
 ## Table of Contents 
 
-- [Description](#description)
-- [User Story](#story)
+- [About Task](#about-task)
+- [User Story](#user-story)
 - [License](#license)
-- [Installation Guide](#installation)
+- [Installation Guide](#installation-guide)
 - [My Solution](#my-solution)
 - [Test](#test)
 - [Samples](#samples)
 - [Questions](#questions)
 
-## Description
+## About Task
 
-Your task is to build a Node.js command-line application that takes in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person. Testing is key to making code maintainable, so you’ll also write a unit test for every part of your code and ensure that it passes each test.
+The Team Profile Generator is a Node.js command-line-input application that takes in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person. The app uses the [Inquirer](https://www.npmjs.com/package/inquirer) for collecting input from the user.
 
-Because this application won’t be deployed, you’ll need to provide a link to a walkthrough video that demonstrates its functionality and all of the tests passing. You’ll need to submit a link to the video AND add it to the readme of your project.
+This app was created using Object-Oriented Programming concepts, namely using classes and constructors to create "Employee" objects based on information entered by the user. The application must have `Employee` class and `Manager`, `Engineer`, and `Intern` subclasses. Files for different objects are also stored in separate .js files and passed among one another using module.exports and require.
+
+This app uses concepts from Test-Driven Development. This application uses the [Jest](https://www.npmjs.com/package/jest) for running the unit tests. Testing is key to making code maintainable.
 
 > **Note**: There is no starter code for this assignment.
 
 ## User Story
 
-```md
+```
 AS A manager
 I WANT to generate a webpage that displays my team's basic info
 SO THAT I have quick access to their emails and GitHub profiles
@@ -70,30 +72,20 @@ A directory structure looks like in the following way:
 
 ## My Solution
 
-GIVEN a command-line application that accepts user input
-WHEN I am prompted for my team members and their information
-THEN an HTML file is generated that displays a nicely formatted team roster based on user input
-WHEN I click on an email address in the HTML
-THEN my default email program opens and populates the TO field of the email with the address
-WHEN I click on the GitHub username
-THEN that GitHub profile opens in a new tab
-WHEN I start the application
-THEN I am prompted to enter the team manager’s name, employee ID, email address, and office number
-WHEN I enter the team manager’s name, employee ID, email address, and office number
-THEN I am presented with a menu with the option to add an engineer or an intern or to finish building my team
-WHEN I select the engineer option
-THEN I am prompted to enter the engineer’s name, ID, email, and GitHub username, and I am taken back to the menu
-WHEN I select the intern option
-THEN I am prompted to enter the intern’s name, ID, email, and school, and I am taken back to the menu
-WHEN I decide to finish building my team
-THEN I exit the application, and the HTML is generated
+Upon launching the app, the user is asked the Manager's information. If the user wants to add more member's information, the app will work no matter how many team members the user adds. The user enters the team member's `name`, selects that member's `role` from a list (options include "Manager", "Engineer" and "Intern"), enters the member's `id`, and enters the member's `email` address lastly with a help of the `Inquirer` library. /promptManager() and promptMember()/ 
 
-The application must have `Employee`, `Manager`, `Engineer`, and `Intern` classes
+Then the user must enter another prompt information that will differ depending on what role was selected. If "Manager" was chosen, the user is prompted for the manager's `office number`; if "Engineer" was selected, the user is asked for the engineer's `github username`; or if "Intern" was selected, the intern's `school` is asked.
+
+After all information about the team member has been entered, the user is asked "Would you like to add more team members?". If so, the user is asked the same questions about the new team member. When the user decide to finish building the team profile, the HTML is generated in ./dist directory. /addMember()/
+
+To generating the HTML consists from 3 parts. First create index.html with the beginHTML using `fs` built in NodeJS module. When each team member object is created, a card containing the team member information is appended after each other in part of the body of HTML. Then the last member has been added, the endHTML is appended to the file. /appendMemberCard()/
+
+An email address in the HTML is clicked my default email program opens and populates the TO field of the email with the address. Also, the GitHub username is clicked that GitHub profile opens in a new tab. 
 
 ## Test
 
 The tests for these classes (in the ./tests directory) must ALL pass.
-
+, so you’ll also write a unit test for every part of your code and ensure that it passes each test.
 The first class is an `Employee` parent class with the following properties and methods:
 
 * `name`
