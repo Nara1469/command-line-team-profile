@@ -1,4 +1,4 @@
-# team-profile-generator
+# command-line-team-profile-generator
 
 Bootcamp Week 10: Homework
 
@@ -82,6 +82,9 @@ To generate the HTML consists of 3 parts. First, create index.html with the begi
 
 An email address in the HTML is clicked my default email program opens and populates the TO field of the email with the address. Also, the GitHub username is clicked the GitHub profile opens in a new tab. 
 
+The created HTML uses CSS3 with a responsive layout that adapts to any viewport.
+
+
 ## Test
 
 The tests for all classes (in the ./tests directory).
@@ -135,6 +138,12 @@ Here is the statistics about test results.
 |Engineer     |    1   |      1     |    2    |  `4`  |
 |Intern       |    1   |      1     |    2    |  `4`  |
 Total Tests (`20`) 
+
+If you want to test this application use the following command in Terminal:
+    
+```
+npm run test
+```
 
 ## Samples
 
